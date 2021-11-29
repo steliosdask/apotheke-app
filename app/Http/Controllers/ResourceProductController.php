@@ -1,13 +1,29 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use App\Models\Product;
 use Illuminate\Http\Request;
 
-class ProductController extends Controller
+class ResourceProductController extends Controller
 {
-    public function insertproduct(Request $request)
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */  
+    public function index()
+    {
+        $products = Product::all();
+        return response()->json(['products'=>$products], 200);
+    }
+
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function store(Request $request)
     {
         $request->validate([
             'name'=>'required',
@@ -29,28 +45,26 @@ class ProductController extends Controller
         return response()->json(['message'=>'You are done'], 200);
     }
 
-
-
-    public function index()
-    {
-        $products = Product::all();
-        return response()->json(['products'=>$products], 200);
-    }
-
-    public function info($id)
+    /**
+     * Display the specified resource.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function show($id)
     {
         $products = Product::find($id);
         return response()->json(['products'=>$products], 200);
     }
 
-    public function destroy($id)
-    {
-        $products = Product::find($id);
-        $products->delete();
-        return response()->json(['products'=>$products], 200);
-    }
-    
-    public function change($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function update(Request $request, $id)
     {
         $product = Product::find($id);
         $product -> name = 'makaronia';
@@ -65,4 +79,16 @@ class ProductController extends Controller
         return response()->json(['message'=>'You are done'], 200);
     }
 
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param  int  $id
+     * @return \Illuminate\Http\Response
+     */
+    public function destroy($id)
+    {
+        $products = Product::find($id);
+        $products->delete();
+        return response()->json(['products'=>$products], 200);
+    }
 }

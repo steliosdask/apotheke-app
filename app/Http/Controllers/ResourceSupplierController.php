@@ -1,10 +1,10 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Models\Supplier;
 use Illuminate\Http\Request;
 
-class ResourceController extends Controller
+class ResourceSupplierController extends Controller
 {
     /**
      * Display a listing of the resource.
@@ -13,17 +13,8 @@ class ResourceController extends Controller
      */
     public function index()
     {
-        //
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
-    {
-        //
+        $supplier = Supplier::all();
+        return response()->json(['suppliers'=>$supplier], 200);
     }
 
     /**
@@ -34,7 +25,22 @@ class ResourceController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'name'=>'required',
+            'address'=>'required',
+            'address_number'=>'required',            
+            'postal_code'=>'required'
+            ]);
+
+
+        $supplier = new Supplier;
+        $supplier -> name = $request -> name;
+        $supplier -> address = $request -> address;
+        $supplier -> address_number = $request -> address_number;
+        $supplier -> retail_price = $request -> retail_price;
+        $supplier -> postal_code = $request -> postal_code;
+        $supplier -> Town = $request -> Town;
+        $supplier -> save();
     }
 
     /**
@@ -44,17 +50,6 @@ class ResourceController extends Controller
      * @return \Illuminate\Http\Response
      */
     public function show($id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     *
-     * @param  int  $id
-     * @return \Illuminate\Http\Response
-     */
-    public function edit($id)
     {
         //
     }
@@ -79,6 +74,8 @@ class ResourceController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $supplier = Supplier::find($id);
+        $supplier->delete();
+        return response()->json(['suppliers'=>$supplier], 200);
     }
 }
