@@ -37,7 +37,6 @@ class ResourceProductController extends Controller
         $product -> barcode = $request -> barcode;
         $product -> wholesale_price = $request -> wholesale_price;
         $product -> retail_price = $request -> retail_price;
-        $product -> supplier = $request -> supplier;
         $product -> category = $request -> category;
         $product -> vat = $request -> vat;
         $product -> save();
@@ -71,7 +70,6 @@ class ResourceProductController extends Controller
         $product -> barcode = '2133334';
         $product -> wholesale_price = '10000.4';
         $product -> retail_price = '100005.4';
-        $product -> supplier = 'me kimaaaa';
         $product -> category = 'mplampla';
         $product -> vat = '6.0';
         $product -> save();
