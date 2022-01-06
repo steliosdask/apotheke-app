@@ -3,6 +3,7 @@
 // use App\Http\Controllers\insert_product;
 // use App\Http\Controllers\ProductController;
 use App\Http\Controllers\ResourceProductController;
+use App\Http\Controllers\ResourceSupplierController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -15,8 +16,8 @@ use Illuminate\Support\Facades\Route;
 // Route::delete('/product/{id}/delete', [ProductController::class , 'destroy']);
 // Route::put('/product/{id}/change', [ProductController::class , 'change']);
 
-Route::resource('/product', ResourceProductController::class);
-Route::resource('/supplier', ResourceSupplierController::class);
+Route::apiResource('product', ResourceProductController::class);
+Route::apiResource('supplier', ResourceSupplierController::class);
 
 
 

@@ -41,6 +41,8 @@ class ResourceSupplierController extends Controller
         $supplier -> postal_code = $request -> postal_code;
         $supplier -> Town = $request -> Town;
         $supplier -> save();
+
+        return response()->json(['message'=>'You are done'], 200);
     }
 
     /**
@@ -63,7 +65,16 @@ class ResourceSupplierController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $supplier = Supplier::find($id);
+        $supplier -> name = $request -> name;
+        $supplier -> address = $request -> address;
+        $supplier -> address_number = $request -> address_number;
+        $supplier -> retail_price = $request -> retail_price;
+        $supplier -> postal_code = $request -> postal_code;
+        $supplier -> Town = $request -> Town;
+        $supplier -> save();
+
+        return response()->json(['message'=>'You are done'], 200);
     }
 
     /**
