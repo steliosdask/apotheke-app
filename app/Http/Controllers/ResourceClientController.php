@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Client;
 use Illuminate\Http\Request;
+use PhpParser\Node\Expr\New_;
 
 class ResourceClientController extends Controller
 {
@@ -14,7 +15,8 @@ class ResourceClientController extends Controller
      */
     public function index()
     {
-        //
+        $clients = Client::all();
+        return response()->json(['clients'=>$clients], 200);
     }
 
     /**
@@ -25,7 +27,13 @@ class ResourceClientController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $client = New Client;
+        $client -> name = $request -> name;
+        $client -> surname = $request -> surname;
+        $client -> address = $request -> address;
+        $client -> address_number = $request -> address_number;
+        $client -> posta_code = $request -> post_code;
+        $client -> save();
     }
 
     /**
@@ -34,9 +42,10 @@ class ResourceClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function show(Client $client)
+    public function show(Client $client, $id)
     {
-        //
+        $clients = Client::find($id);
+        return response()->json(['clients'=>$clients], 200);
     }
 
     /**
@@ -46,9 +55,15 @@ class ResourceClientController extends Controller
      * @param  \App\Models\Client  $client
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Client $client)
+    public function update(Request $request, $id)
     {
-        //
+        $client = Client::find($id);
+        $client -> name = $request -> name;
+        $client -> surname = $request -> surname;
+        $client -> address = $request -> address;
+        $client -> address_number = $request -> address_number;
+        $client -> posta_code = $request -> post_code;
+        $client -> save();
     }
 
     /**
