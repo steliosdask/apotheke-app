@@ -66,12 +66,12 @@ class ResourceProductController extends Controller
     public function update(Request $request, $id)
     {
         $product = Product::find($id);
-        $product -> name = 'makaronia';
-        $product -> barcode = '2133334';
-        $product -> wholesale_price = '10000.4';
-        $product -> retail_price = '100005.4';
-        $product -> category = 'mplampla';
-        $product -> vat = '6.0';
+        $product -> name = $request -> name;
+        $product -> barcode = $request -> barcode;
+        $product -> wholesale_price = $request -> wholesale_price;
+        $product -> retail_price = $request -> retail_price;
+        $product -> category = $request -> category;
+        $product -> vat = $request -> vat;
         $product -> save();
 
         return response()->json(['message'=>'You are done'], 200);
